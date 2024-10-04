@@ -1,0 +1,29 @@
+<?php
+function findPairs($arr, $target) {
+    $result = [];
+    $seen = [];
+
+    foreach ($arr as $index => $value) {
+        $complement = $target - $value;
+        if (isset($seen[$complement])) {
+            $result[] = [$seen[$complement], $index];
+        }
+        $seen[$value] = $index;
+    }
+
+    return $result;
+}
+
+// Contoh penggunaan
+$inputArray = [1, 4, 5, 6, 8, 9];
+$target = 10;
+$pairs = findPairs($inputArray, $target);
+
+if (empty($pairs)) {
+    echo "Tidak ada pasangan indeks yang menghasilkan penjumlahan target.";
+} else {
+    foreach ($pairs as $pair) {
+        echo "[" . $pair[0] . ", " . $pair[1] . "]\n";
+    }
+}
+?>
